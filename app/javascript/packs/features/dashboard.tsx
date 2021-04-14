@@ -1,19 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import { Test } from "../__generated__/Test";
+import { Search, SearchVariables } from "./__generated__/Search";
 
-const GET_TEST = gql`
-  query Test {
-    testField
+const SEARCH_QUERY = gql`
+  query Search($title: String!) {
+    searchMovieBy(title: $title) {
+      response
+      totalResults
+      movies {
+        Title
+        Runtime
+        BoxOffice
+        imdbRating
+      }
+    }
   }
 `;
 
 const Dashboard = () => {
-  const { loading, error, data } = useQuery<Test>(GET_TEST);
+  const [submitValue, setSubmitValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
-  if (loading) return <p>Loading...</p>;
+  const { loading, error, data } = useQuery<Search, SearchVariables>(
+    SEARCH_QUERY,
+    {
+      variables: { title: submitValue },
+      skip: submitValue === "",
+    },
+  );
 
-  return <p className="p-10">Hello there {data.testField}</p>;
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSubmitValue(searchValue);
+  };
+
+  if (error) return <p>Error! ${error.message}</p>;
+
+  return (
+    <>
+      <form className="p-10 bg-red-400" onSubmit={handleSearch}>
+        <input
+          placeholder="Search for a movie"
+          type="text"
+          name="search"
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
+      {loading ? <p>Loading..</p> : JSON.stringify(data, null, 2)}
+    </>
+  );
 };
 
 export default Dashboard;
