@@ -4,23 +4,15 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
-
-const Hello = (props) => (
-  <div className="p-20 text-2xl">Hello {props.name}!</div>
-);
-
-Hello.defaultProps = {
-  name: "David",
-};
-
-Hello.propTypes = {
-  name: PropTypes.string,
-};
+import { ApolloProvider } from "@apollo/client";
+import { client } from "./apollo";
+import Dashboard from "./features/dashboard";
 
 document.addEventListener("DOMContentLoaded", () => {
   ReactDOM.render(
-    <Hello name="React" />,
+    <ApolloProvider client={client}>
+      <Dashboard />
+    </ApolloProvider>,
     document.body.appendChild(document.createElement("div")),
   );
 });
