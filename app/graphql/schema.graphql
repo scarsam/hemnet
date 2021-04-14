@@ -1,3 +1,31 @@
+type Movie {
+  Actors: String
+  Awards: String
+  BoxOffice: String
+  Country: String
+  DVD: String
+  Director: String
+  Genre: String
+  Language: String
+  Metascore: String
+  Plot: String
+  Poster: String
+  Production: String
+  Rated: String
+  Ratings: [Rating!]
+  Released: String
+  Response: String
+  Runtime: String
+  Title: String
+  Type: String
+  Website: String
+  Writer: String
+  Year: String
+  imdbID: String
+  imdbRating: String
+  imdbVotes: String
+}
+
 type Mutation {
   """
   An example field added by the generator
@@ -6,8 +34,26 @@ type Mutation {
 }
 
 type Query {
+  searchMovieBy(
+    """
+    The title of the movie
+    """
+    title: String!
+  ): SearchResult!
+
   """
   An example field added by the generator
   """
   testField: String!
+}
+
+type Rating {
+  Source: String
+  Value: String
+}
+
+type SearchResult {
+  movies: [Movie!]!
+  response: String!
+  totalResults: String!
 }
