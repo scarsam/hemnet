@@ -10,11 +10,11 @@ module Types
     field :test_field, String, null: false, description: "An example field added by the generator"
     field :search_movie_by, Types::SearchResultType, null: false do
       argument :title, String, 'The title of the movie', required: true
+      argument :page, Int, 'The next page of results', required: false
     end
 
-    def search_movie_by(title:)
-      test = Omdb::Search.by_title(title)
-      test
+    def search_movie_by(title:, page: 1)
+      Moviedb::Search.by_title(title, page)
     end
 
     def test_field

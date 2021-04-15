@@ -1,3 +1,17 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.collapse {
+  background-clip: text;
+  background: linear-gradient(#000000, #3330);
+  display: inline-block;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.expanded {
+  background: none;
+  max-height: 9999px;
+  transition: max-height 1s ease-in-out, background 1s ease-in-out;
+}

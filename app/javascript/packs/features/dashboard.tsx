@@ -1,17 +1,29 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
+import SearchForm from "../components/SearchForm";
+import Card from "../components/Card";
 import { Search, SearchVariables } from "./__generated__/Search";
 
 const SEARCH_QUERY = gql`
-  query Search($title: String!) {
-    searchMovieBy(title: $title) {
-      response
+  query Search($title: String!, $page: Int) {
+    searchMovieBy(title: $title, page: $page) {
+      totalPages
       totalResults
+      page
       movies {
-        Title
-        Runtime
-        BoxOffice
-        imdbRating
+        backdropPath
+        id
+        overview
+        posterPath
+        releaseDate
+        title
+        voteAverage
+        voteCount
+      }
+      config {
+        baseUrl
+        posterSizes
+        backdropSizes
       }
     }
   }
@@ -19,7 +31,6 @@ const SEARCH_QUERY = gql`
 
 const Dashboard = () => {
   const [submitValue, setSubmitValue] = useState("");
-  const [searchValue, setSearchValue] = useState("");
 
   const { loading, error, data } = useQuery<Search, SearchVariables>(
     SEARCH_QUERY,
@@ -29,26 +40,33 @@ const Dashboard = () => {
     },
   );
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setSubmitValue(searchValue);
-  };
-
   if (error) return <p>Error! ${error.message}</p>;
 
+  // const { movies, totalResults } = data?.searchMovieBy;
+
+  console.log(data?.searchMovieBy?.movies);
   return (
-    <>
-      <form className="p-10 bg-red-400" onSubmit={handleSearch}>
-        <input
-          placeholder="Search for a movie"
-          type="text"
-          name="search"
-          onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form>
-      {loading ? <p>Loading..</p> : JSON.stringify(data, null, 2)}
-    </>
+    <div className="bg-gray-900">
+      <SearchForm handleSubmit={setSubmitValue} />
+      {loading ? (
+        <p>Loading..</p>
+      ) : (
+        <div className="container m-auto">
+          {data?.searchMovieBy?.totalResults && (
+            <p>Results ({data?.searchMovieBy?.totalResults})</p>
+          )}
+          <div className="grid grid-cols-3 gap-4">
+            {data?.searchMovieBy?.movies.map((movie) => (
+              <Card
+                key={movie.id}
+                config={data?.searchMovieBy?.config}
+                movie={movie}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

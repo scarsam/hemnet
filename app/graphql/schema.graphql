@@ -1,29 +1,22 @@
+type Config {
+  backdropSizes: [String!]
+  baseUrl: String
+  logoSizes: [String!]
+  posterSizes: [String!]
+  profileSizes: [String!]
+  secureBaseUrl: String
+  stillSizes: [String!]
+}
+
 type Movie {
-  Actors: String
-  Awards: String
-  BoxOffice: String
-  Country: String
-  DVD: String
-  Director: String
-  Genre: String
-  Language: String
-  Metascore: String
-  Plot: String
-  Poster: String
-  Production: String
-  Rated: String
-  Ratings: [Rating!]
-  Released: String
-  Response: String
-  Runtime: String
-  Title: String
-  Type: String
-  Website: String
-  Writer: String
-  Year: String
-  imdbID: String
-  imdbRating: String
-  imdbVotes: String
+  backdropPath: String
+  id: Int
+  overview: String
+  posterPath: String
+  releaseDate: String
+  title: String
+  voteAverage: Int
+  voteCount: Int
 }
 
 type Mutation {
@@ -36,6 +29,11 @@ type Mutation {
 type Query {
   searchMovieBy(
     """
+    The next page of results
+    """
+    page: Int
+
+    """
     The title of the movie
     """
     title: String!
@@ -47,13 +45,10 @@ type Query {
   testField: String!
 }
 
-type Rating {
-  Source: String
-  Value: String
-}
-
 type SearchResult {
+  config: Config!
   movies: [Movie!]!
-  response: String!
-  totalResults: String!
+  page: Int!
+  totalPages: Int!
+  totalResults: Int!
 }

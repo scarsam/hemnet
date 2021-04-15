@@ -9,17 +9,30 @@
 
 export interface Search_searchMovieBy_movies {
   __typename: "Movie";
-  Title: string | null;
-  Runtime: string | null;
-  BoxOffice: string | null;
-  imdbRating: string | null;
+  backdropPath: string | null;
+  id: number | null;
+  overview: string | null;
+  posterPath: string | null;
+  releaseDate: string | null;
+  title: string | null;
+  voteAverage: number | null;
+  voteCount: number | null;
+}
+
+export interface Search_searchMovieBy_config {
+  __typename: "Config";
+  baseUrl: string | null;
+  posterSizes: string[] | null;
+  backdropSizes: string[] | null;
 }
 
 export interface Search_searchMovieBy {
   __typename: "SearchResult";
-  response: string;
-  totalResults: string;
+  totalPages: number;
+  totalResults: number;
+  page: number;
   movies: Search_searchMovieBy_movies[];
+  config: Search_searchMovieBy_config;
 }
 
 export interface Search {
@@ -28,4 +41,5 @@ export interface Search {
 
 export interface SearchVariables {
   title: string;
+  page?: number | null;
 }
