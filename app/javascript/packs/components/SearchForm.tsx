@@ -9,8 +9,9 @@ const SearchForm = ({ handleSubmit }) => {
   };
 
   return (
-    <form className="p-10 bg-red-400" onSubmit={handleSearch}>
+    <form className="px-10 py-8 bg-gray-800" onSubmit={handleSearch}>
       <input
+        className="p-2"
         placeholder="Search for a movie"
         type="text"
         name="search"

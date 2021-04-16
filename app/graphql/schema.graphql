@@ -19,6 +19,13 @@ type Movie {
   voteCount: Int
 }
 
+enum MovieSort {
+  releaseDateAsc
+  titleAsc
+  votesAverageAsc
+  votesCountAsc
+}
+
 type Mutation {
   """
   An example field added by the generator
@@ -28,6 +35,8 @@ type Mutation {
 
 type Query {
   searchMovieBy(
+    filter: MovieSort = null
+
     """
     The next page of results
     """

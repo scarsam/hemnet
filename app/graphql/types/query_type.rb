@@ -11,10 +11,23 @@ module Types
     field :search_movie_by, Types::SearchResultType, null: false do
       argument :title, String, 'The title of the movie', required: true
       argument :page, Int, 'The next page of results', required: false
+      argument :filter, Types::MovieSortType, required: false, default_value: nil
     end
 
-    def search_movie_by(title:, page: 1)
-      Moviedb::Search.by_title(title, page)
+    def search_movie_by(title:, page: 1, filter: nil)
+      movies = Moviedb::Search.by_title(title, page)
+      if (filter)
+        filtered_movies = movies[:movies].sort_by { |h| h[filter] }
+        {
+          config: movies[:config],
+          page: movies[:page],
+          total_pages: movies[:total_pages],
+          total_results: movies[:total_results],
+          movies: filtered_movies,
+        }
+      else
+        movies
+      end
     end
 
     def test_field
