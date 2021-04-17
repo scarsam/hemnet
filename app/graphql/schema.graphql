@@ -20,10 +20,10 @@ type Movie {
 }
 
 enum MovieSort {
-  releaseDateAsc
-  titleAsc
-  votesAverageAsc
-  votesCountAsc
+  releaseDate
+  title
+  votesAverage
+  votesCount
 }
 
 type Mutation {
@@ -35,7 +35,7 @@ type Mutation {
 
 type Query {
   searchMovieBy(
-    filter: MovieSort = null
+    filter: MovieSort
 
     """
     The next page of results

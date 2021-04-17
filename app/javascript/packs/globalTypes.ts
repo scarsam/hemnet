@@ -7,6 +7,13 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum MovieSort {
+  releaseDate = "releaseDate",
+  title = "title",
+  votesAverage = "votesAverage",
+  votesCount = "votesCount",
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

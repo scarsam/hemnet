@@ -1,8 +1,8 @@
 module Types
   class MovieSortType < Types::BaseEnum
-    value "titleAsc", value: 'title'
-    value "votesCountAsc", value: 'vote_count'
-    value "votesAverageAsc", value: 'vote_average'
-    value "releaseDateAsc", value: 'release_date'
+    value "title", value: 'title'
+    value "votesCount", value: 'vote_count'
+    value "votesAverage", value: 'vote_average'
+    value "releaseDate", value: 'release_date'
   end
 end

@@ -6,8 +6,8 @@ import Pagination from "../components/Pagination";
 import { Search, SearchVariables } from "./__generated__/Search";
 
 const SEARCH_QUERY = gql`
-  query Search($title: String!, $page: Int) {
-    searchMovieBy(title: $title, page: $page) {
+  query Search($title: String!, $page: Int, $filter: MovieSort) {
+    searchMovieBy(title: $title, page: $page, filter: $filter) {
       totalPages
       totalResults
       page
@@ -32,13 +32,13 @@ const SEARCH_QUERY = gql`
 
 const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [submitValue, setSubmitValue] = useState("");
-  console.log(currentPage);
+  const [searchQuery, setSearchQuery] = useState({ title: "", filter: null });
+
   const { loading, error, data } = useQuery<Search, SearchVariables>(
     SEARCH_QUERY,
     {
-      variables: { title: submitValue, page: currentPage },
-      skip: submitValue === "",
+      variables: { page: currentPage, ...searchQuery },
+      skip: searchQuery.title === "",
     },
   );
 
@@ -47,7 +47,7 @@ const Dashboard = () => {
   return (
     <div className="py-5">
       <div className="container m-auto">
-        <SearchForm handleSubmit={setSubmitValue} />
+        <SearchForm handleSubmit={setSearchQuery} />
       </div>
 
       {loading ? (

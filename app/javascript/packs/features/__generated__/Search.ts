@@ -3,6 +3,8 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { MovieSort } from "./../../globalTypes";
+
 // ====================================================
 // GraphQL query operation: Search
 // ====================================================
@@ -42,4 +44,5 @@ export interface Search {
 export interface SearchVariables {
   title: string;
   page?: number | null;
+  filter?: MovieSort | null;
 }

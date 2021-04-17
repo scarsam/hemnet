@@ -38,7 +38,9 @@ const Card = ({
               {movie.voteAverage}
             </div>
           </Pill>
-          <Pill>{movie.voteCount} votes</Pill>
+          <span className="mx-2">
+            <Pill>{movie.voteCount} votes</Pill>
+          </span>
           <Pill>{movie.releaseDate}</Pill>
         </ul>
         <p
