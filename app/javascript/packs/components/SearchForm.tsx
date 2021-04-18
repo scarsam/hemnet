@@ -36,7 +36,7 @@ const SearchForm: React.FC<ISearchForm> = ({ handleSubmit }) => {
   };
 
   return (
-    <div className="px-10 py-8 bg-gray-800 bg-opacity-70">
+    <div className="px-10 py-8 bg-gray-600 bg-opacity-70">
       <Formik
         validationSchema={SearchSchema}
         initialValues={{ title: "", filter: "" }}

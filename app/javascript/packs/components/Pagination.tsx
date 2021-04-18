@@ -28,7 +28,7 @@ const Pagination: React.VFC<IPagination> = ({
           })
         }
       >
-        Back page
+        Previous page
       </Button>
       <Button
         variant="large"
