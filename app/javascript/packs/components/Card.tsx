@@ -5,7 +5,7 @@ import {
 } from "../features/__generated__/Search";
 import Pill from "./Pill";
 import Button from "./Button";
-import Star from "images/star.svg";
+import Star from "../icons/star.svg";
 
 interface ICard {
   movie: Search_searchMovieBy_movies;

@@ -1,11 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import SearchForm from "../components/SearchForm";
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
 import { Search, SearchVariables } from "./__generated__/Search";
 
-const SEARCH_QUERY = gql`
+export const SEARCH_QUERY = gql`
   query Search($title: String!, $page: Int, $filter: MovieSort) {
     searchMovieBy(title: $title, page: $page, filter: $filter) {
       totalPages

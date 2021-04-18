@@ -25,10 +25,22 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@types/jest": "^26.0.22",
     "apollo": "^2.32.5",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5",
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "graphql:codegen": "bin/rails dump_graphql_schema && apollo client:codegen --target typescript --globalTypesFile=app/javascript/packs/globalTypes.ts"
+    "graphql:codegen": "bin/rails dump_graphql_schema && apollo client:codegen --target typescript --globalTypesFile=app/javascript/packs/globalTypes.ts",
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "roots": [
+      "spec/javascript"
+    ]
   }
 }
