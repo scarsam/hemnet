@@ -38,7 +38,7 @@ const Card: React.VFC<ICard> = ({ movie, config }) => {
               {movie.voteAverage}
             </div>
           </Pill>
-          <span className="mx-2">
+          <span className="mx-1">
             <Pill>{movie.voteCount} votes</Pill>
           </span>
           <Pill>{movie.releaseDate}</Pill>
