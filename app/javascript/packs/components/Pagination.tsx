@@ -1,13 +1,25 @@
 import React from "react";
+import Button from "./Button";
 
-const Pagination = ({ totalPages, setCurrentPage }) => {
+interface IPagination {
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Pagination: React.VFC<IPagination> = ({
+  currentPage,
+  totalPages,
+  setCurrentPage,
+}) => {
   const pages = Array.from({ length: totalPages / 20 }, (_, i) => i + 1);
 
   return (
     <div className="flex justify-center">
-      <button
-        className="bg-yellow-400 rounded-full px-2 m-2"
-        onClick={() =>
+      <Button
+        variant="large"
+        disabled={currentPage === pages[0]}
+        handleClick={() =>
           setCurrentPage((currentPage) => {
             if (currentPage > pages[0]) {
               return (currentPage = currentPage - 1);
@@ -17,10 +29,11 @@ const Pagination = ({ totalPages, setCurrentPage }) => {
         }
       >
         Back page
-      </button>
-      <button
-        className="bg-yellow-400 rounded-full px-2 m-2"
-        onClick={() =>
+      </Button>
+      <Button
+        variant="large"
+        disabled={currentPage === pages[pages.length - 1]}
+        handleClick={() =>
           setCurrentPage((currentPage) => {
             if (currentPage < pages[pages.length - 1]) {
               return (currentPage = currentPage + 1);
@@ -30,7 +43,7 @@ const Pagination = ({ totalPages, setCurrentPage }) => {
         }
       >
         Next page
-      </button>
+      </Button>
     </div>
   );
 };

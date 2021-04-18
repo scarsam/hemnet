@@ -51,7 +51,7 @@ const Dashboard = () => {
       </div>
 
       {loading ? (
-        <p>Loading..</p>
+        <p className="text-white text-2xl text-center pt-20">Loading..</p>
       ) : (
         <div className="container m-auto py-10">
           {data?.searchMovieBy?.totalResults && (
@@ -72,6 +72,7 @@ const Dashboard = () => {
       )}
       {data?.searchMovieBy?.totalResults && (
         <Pagination
+          currentPage={currentPage}
           totalPages={data?.searchMovieBy?.totalResults}
           setCurrentPage={setCurrentPage}
         />

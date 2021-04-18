@@ -9,7 +9,11 @@ import {
 } from "formik";
 import { MovieSort } from "../globalTypes";
 
-const SearchForm = ({ handleSubmit }) => {
+interface ISearchForm {
+  handleSubmit: (args: {}) => void;
+}
+
+const SearchForm: React.FC<ISearchForm> = ({ handleSubmit }) => {
   const handleSearch = (
     values: FormikValues,
     { setSubmitting }: FormikHelpers<FormikValues>,

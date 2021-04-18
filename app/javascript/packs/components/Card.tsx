@@ -4,15 +4,15 @@ import {
   Search_searchMovieBy_config,
 } from "../features/__generated__/Search";
 import Pill from "./Pill";
+import Button from "./Button";
 import Star from "images/star.svg";
 
-const Card = ({
-  movie,
-  config,
-}: {
+interface ICard {
   movie: Search_searchMovieBy_movies;
   config: Search_searchMovieBy_config;
-}) => {
+}
+
+const Card: React.VFC<ICard> = ({ movie, config }) => {
   const [isExpanded, setExpanded] = useState(false);
   const imagePath = `${config.baseUrl}/${config.backdropSizes[2]}/${movie.backdropPath}`;
 
@@ -52,13 +52,12 @@ const Card = ({
         >
           {movie.overview}
         </p>
-
-        <button
-          className="rounded-full bg-yellow-300 py-1 px-5 flex m-auto"
-          onClick={() => setExpanded((expanded) => !expanded)}
+        <Button
+          variant="small"
+          handleClick={() => setExpanded((expanded) => !expanded)}
         >
           {isExpanded ? "Show less" : "Read more"}
-        </button>
+        </Button>
       </div>
     </div>
   );
