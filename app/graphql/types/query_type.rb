@@ -29,9 +29,5 @@ module Types
         movies
       end
     end
-
-    def test_field
-      "Hello World!"
-    end
   end
 end

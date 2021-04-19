@@ -41,6 +41,9 @@
   "jest": {
     "roots": [
       "spec/javascript"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/setuptests.ts"
     ]
   }
 }

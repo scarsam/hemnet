@@ -36,7 +36,7 @@ const SearchForm: React.FC<ISearchForm> = ({ handleSubmit }) => {
   };
 
   return (
-    <div className="px-10 py-8 bg-gray-600 bg-opacity-70">
+    <div className="px-10 py-8 bg-gray-600 bg-opacity-70 rounded-sm">
       <Formik
         validationSchema={SearchSchema}
         initialValues={{ title: "", filter: "" }}
@@ -63,6 +63,7 @@ const SearchForm: React.FC<ISearchForm> = ({ handleSubmit }) => {
                 } p-2 rounded-md`}
                 as="select"
                 name="filter"
+                data-testid="filter"
               >
                 <option value="">- Sort by -</option>
                 <option value={MovieSort.releaseDate}>Release date</option>

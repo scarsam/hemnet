@@ -42,7 +42,10 @@ const Dashboard = () => {
     },
   );
 
-  if (error) return <p>Error! ${error.message}</p>;
+  if (error)
+    return (
+      <p className="text-white text-2xl text-center">Error! ${error.message}</p>
+    );
 
   return (
     <div className="py-5">
@@ -82,3 +85,7 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+// Tests for GraphQL (Queries and filtering response)
+// More client side tests
+// Error handling both server and client side
