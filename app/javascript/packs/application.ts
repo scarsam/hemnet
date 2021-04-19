@@ -8,6 +8,8 @@ import Turbolinks from "turbolinks";
 import * as ActiveStorage from "@rails/activestorage";
 import "channels";
 import "stylesheets/application";
+import * as dotenv from "dotenv";
+dotenv.config({ path: __dirname + "/.env" });
 
 Rails.start();
 Turbolinks.start();

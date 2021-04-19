@@ -7,7 +7,7 @@ const railsCsrfToken = document
 export const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: "http://localhost:3000/graphql",
+    uri: process.env.GRAPHQL_API_URL,
     headers: {
       "X-CSRF-Token": railsCsrfToken,
     },
