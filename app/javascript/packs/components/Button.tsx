@@ -16,8 +16,8 @@ const Button: React.FC<IButton> = ({
     <button
       className={`${
         variant === "large"
-          ? "bg-white rounded-full px-6 py-4 m-2 disabled:opacity-50 text-large"
-          : "rounded-full bg-yellow-300 py-1 px-5 flex m-auto"
+          ? "bg-white rounded-full px-6 py-4 m-2 disabled:opacity-50 text-large focus:outline-none"
+          : "rounded-full bg-yellow-300 py-1 px-5 flex m-auto focus:outline-none"
       }`}
       disabled={disabled}
       onClick={handleClick}

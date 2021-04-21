@@ -10,13 +10,13 @@ body {
   background-clip: text;
   background: linear-gradient(#000000, #3330);
   display: inline-block;
-  max-height: 100px;
+  max-height: 50px;
   overflow: hidden;
-  transition: max-height 1s ease-in-out, background 1s ease-in-out;
+  transition: max-height 0.5s ease-in-out, background 0.5s ease-in-out;
 }
 
 .expanded {
   background: none;
-  max-height: 9999px;
-  transition: max-height 1s ease-in-out, background 1s ease-in-out;
+  max-height: 999px;
+  transition: max-height 0.5s ease-in-out, background 0.5s ease-in-out;
 }

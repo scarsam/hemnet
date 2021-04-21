@@ -48,7 +48,7 @@ const Dashboard = () => {
     );
 
   return (
-    <div className="py-5">
+    <div className="py-5 px-2">
       <div className="container m-auto">
         <SearchForm handleSubmit={setSearchQuery} />
       </div>
