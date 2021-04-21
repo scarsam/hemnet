@@ -3,7 +3,11 @@ import { gql, useQuery } from "@apollo/client";
 import SearchForm from "../components/SearchForm";
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
+import ErrorMessage from "../components/ErrorMessage";
+import Loading from "../components/Loading";
+import Container from "../layouts/Container";
 import { Search, SearchVariables } from "./__generated__/Search";
+import { discoverTrending } from "./__generated__/discoverTrending";
 
 export const SEARCH_QUERY = gql`
   query Search($title: String!, $page: Int, $filter: MovieSort) {
@@ -30,9 +34,33 @@ export const SEARCH_QUERY = gql`
   }
 `;
 
+export const TRENDING_QUERY = gql`
+  query discoverTrending {
+    trendingMovies {
+      movies {
+        backdropPath
+        posterPath
+        title
+      }
+      config {
+        baseUrl
+        posterSizes
+        backdropSizes
+      }
+    }
+  }
+`;
+
 const Dashboard = () => {
+  const [trendingMovie, setTrendingMovie] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState({ title: "", filter: null });
+
+  const {
+    loading: trendingLoading,
+    error: trendingError,
+    data: trendingData,
+  } = useQuery<discoverTrending>(TRENDING_QUERY);
 
   const { loading, error, data } = useQuery<Search, SearchVariables>(
     SEARCH_QUERY,
@@ -42,21 +70,33 @@ const Dashboard = () => {
     },
   );
 
-  if (error)
-    return (
-      <p className="text-white text-2xl text-center">Error! ${error.message}</p>
-    );
+  if (error || trendingError)
+    return <ErrorMessage error={error || trendingError} />;
+
+  const buildMoviePath = (path) => {
+    return `${path?.trendingMovies?.config?.baseUrl}/${path?.trendingMovies?.config?.backdropSizes[2]}/${path?.trendingMovies?.movies[0]?.backdropPath}`;
+  };
 
   return (
-    <div className="py-5 px-2">
-      <div className="container m-auto">
-        <SearchForm handleSubmit={setSearchQuery} />
-      </div>
+    <div
+      className={`py-5 px-2 h-full bg-no-repeat bg-cover bg-opacity-50 relative ${
+        trendingMovie ? "hero-bg" : "hero-bg hero-bg-animation"
+      }`}
+      style={{
+        backgroundImage: `url(${buildMoviePath(trendingData)})`,
+      }}
+    >
+      <Container>
+        <SearchForm
+          handleSubmit={setSearchQuery}
+          handleTrendingMovie={setTrendingMovie}
+        />
+      </Container>
 
-      {loading ? (
-        <p className="text-white text-2xl text-center pt-20">Loading..</p>
+      {loading || trendingLoading ? (
+        <Loading />
       ) : (
-        <div className="container m-auto py-10">
+        <Container>
           {data?.searchMovieBy?.totalResults && (
             <p className="text-white text-xl">
               Results ({data?.searchMovieBy?.totalResults})
@@ -71,7 +111,7 @@ const Dashboard = () => {
               />
             ))}
           </div>
-        </div>
+        </Container>
       )}
       {data?.searchMovieBy?.totalResults && (
         <Pagination

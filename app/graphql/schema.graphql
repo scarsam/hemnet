@@ -47,11 +47,7 @@ type Query {
     """
     title: String!
   ): SearchResult!
-
-  """
-  An example field added by the generator
-  """
-  testField: String!
+  trendingMovies: SearchResult!
 }
 
 type SearchResult {

@@ -8,32 +8,22 @@ import {
   FormikHelpers,
 } from "formik";
 import { MovieSort } from "../globalTypes";
-import * as Yup from "yup";
-
+import { SearchSchema } from "../validation/search";
 interface ISearchForm {
   handleSubmit: (args: {}) => void;
+  handleTrendingMovie: (args: {}) => void;
 }
 
-const SearchSchema = Yup.object().shape({
-  title: Yup.string()
-    .matches(/^[a-zA-Z0-9 ]+$/, "Please enter valid title")
-    .required("Please enter a movie title"),
-  filter: Yup.string()
-    .oneOf([
-      MovieSort.releaseDate,
-      MovieSort.title,
-      MovieSort.votesAverage,
-      MovieSort.votesCount,
-    ])
-    .required("Please select a filter"),
-});
-
-const SearchForm: React.FC<ISearchForm> = ({ handleSubmit }) => {
+const SearchForm: React.FC<ISearchForm> = ({
+  handleSubmit,
+  handleTrendingMovie,
+}) => {
   const handleSearch = (
     values: FormikValues,
     { setSubmitting }: FormikHelpers<FormikValues>,
   ) => {
     setSubmitting(false);
+    handleTrendingMovie(false);
     handleSubmit({ ...values, filter: values.filter ? values.filter : null });
   };
 

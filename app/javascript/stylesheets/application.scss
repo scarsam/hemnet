@@ -2,6 +2,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+html,
+body,
+body > div {
+  height: 100%;
+}
+
 body {
   background-color: #1b1b1b;
 }
@@ -19,4 +25,27 @@ body {
   background: none;
   max-height: 999px;
   transition: max-height 0.5s ease-in-out, background 0.5s ease-in-out;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(27, 27, 27, 0.9);
+}
+
+.hero-bg-animation::before {
+  animation: fade-out 2s ease-in-out forwards;
+}
+
+@keyframes fade-out {
+  from {
+    background-color: rgba(27, 27, 27, 0.9);
+  }
+  to {
+    background-color: rgba(27, 27, 27, 1);
+  }
 }

@@ -15,7 +15,7 @@ const Pagination: React.VFC<IPagination> = ({
   const pages = Array.from({ length: totalPages / 20 }, (_, i) => i + 1);
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center py-10">
       <Button
         variant="large"
         disabled={currentPage === pages[0]}
